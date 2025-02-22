@@ -3,14 +3,7 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { View } from 'react-native';
 
-if (__DEV__) {
-  // Sobrescreve os logs para ambiente de desenvolvimento
-  console.log = () => {};
-  console.info = () => {};
-  console.warn = () => {};
-  console.error = () => {};
-  console.debug = () => {};
-}
+
 
 export default function RootLayout() {
   useEffect(() => {
@@ -32,7 +25,7 @@ export default function RootLayout() {
 
         {/* Adiciona a telaInicial como parte da navegação */}
         <Stack.Screen name="telaInicial" options={{ headerShown: false }} />
-        <Stack.Screen name= "InformacoesCorporais" options = {{  headerShown: false }} />
+        <Stack.Screen name="informacoesCorporais" options={{ headerShown: false }} />
       </Stack>
     </View>
   );
