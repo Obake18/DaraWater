@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ProgressBarAndroid } from 'react-native';
 
 const WATER_GOAL = 2000; // Exemplo de meta de 2000 ml
 
@@ -23,12 +23,26 @@ export default function TelaInicial() {
         <Text style={styles.title}>Lembrete de Hidratação</Text>
       </View>
 
-      {/* Exemplo de exibição de consumo */}
+      {/* Exibição de consumo */}
       <Text style={styles.intakeText}>Consumido: {waterIntake} ml</Text>
 
+      {/* Barra de Progresso */}
+      <ProgressBarAndroid
+        styleAttr="Horizontal"
+        indeterminate={false}
+        progress={waterIntake / WATER_GOAL}
+        color="#00796B"
+      />
+
       {/* Botão para adicionar 200 ml */}
-      <TouchableOpacity style={styles.button} onPress={() => addWater(200)}>
-        <Text style={styles.buttonText}>+ 200 ml</Text>
+      <TouchableOpacity
+        style={[styles.button, { backgroundColor: waterIntake === WATER_GOAL ? '#B2DFDB' : '#00796B' }]}
+        onPress={() => addWater(200)}
+        disabled={waterIntake === WATER_GOAL} // Desabilita o botão ao atingir a meta
+      >
+        <Text style={styles.buttonText}>
+          {waterIntake === WATER_GOAL ? 'Meta Atingida' : '+ 200 ml'}
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -63,7 +77,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   button: {
-    backgroundColor: '#00796B',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 10,

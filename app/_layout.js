@@ -32,6 +32,7 @@ export default function RootLayout() {
 
         {/* Adiciona a telaInicial como parte da navegação */}
         <Stack.Screen name="telaInicial" options={{ headerShown: false }} />
+        <Stack.Screen name= "InformacoesCorporais" options = {{  headerShown: false }} />
       </Stack>
     </View>
   );
