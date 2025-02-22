@@ -4,7 +4,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { View } from 'react-native';
 
 if (__DEV__) {
-  // Sobrescreve as funções de log do console para não fazerem nada
+  // Sobrescreve os logs para ambiente de desenvolvimento
   console.log = () => {};
   console.info = () => {};
   console.warn = () => {};
@@ -12,15 +12,24 @@ if (__DEV__) {
   console.debug = () => {};
 }
 
+export default function RootLayout() {
+  useEffect(() => {
+    // Previne o auto-hide da tela de splash
+    async function prepare() {
+      try {
+        await SplashScreen.preventAutoHideAsync();
+      } catch (e) {
+        console.warn(e);
+      }
+    }
+    prepare();
+  }, []);
 
-// Previne o auto-hide da tela de splash
-SplashScreen.preventAutoHideAsync();
-
-
-return (
+  return (
     <View style={{ flex: 1 }}>
       <Stack>
-      <Stack.Screen name="telaInicial" options={{ headerShown: false }} />
+        <Stack.Screen name="telaInicial" options={{ headerShown: false }} />
       </Stack>
     </View>
   );
+}
