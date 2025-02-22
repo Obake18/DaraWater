@@ -14,7 +14,6 @@ if (__DEV__) {
 
 export default function RootLayout() {
   useEffect(() => {
-    // Previne o auto-hide da tela de splash
     async function prepare() {
       try {
         await SplashScreen.preventAutoHideAsync();
@@ -28,6 +27,10 @@ export default function RootLayout() {
   return (
     <View style={{ flex: 1 }}>
       <Stack>
+        {/* Define a tela inicial como index.js */}
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+
+        {/* Adiciona a telaInicial como parte da navegação */}
         <Stack.Screen name="telaInicial" options={{ headerShown: false }} />
       </Stack>
     </View>
