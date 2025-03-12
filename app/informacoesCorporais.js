@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Button } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Button } from 'react-native-web';
 
-// Função para calcular a meta de água baseada no peso e no objetivo
 const calcularMetaDeAgua = (peso, objetivo) => {
   let base = peso * 20; // 20 ml por kg
   if (objetivo === 'atividade') {
@@ -22,7 +20,6 @@ export default function InformacoesCorporais() {
   const [metaAgua, setMetaAgua] = useState(0);
 
   useEffect(() => {
-    // Carregar os dados do AsyncStorage
     const carregarDados = async () => {
       try {
         const dados = await AsyncStorage.getItem('dadosHidratacao');
@@ -57,7 +54,7 @@ export default function InformacoesCorporais() {
       };
       await AsyncStorage.setItem('dadosHidratacao', JSON.stringify(dadosParaSalvar));
       setHistorico(novoHistorico);
-      setAguaBebida(0); // Resetando a água bebida após salvar os dados
+      setAguaBebida(0);
     } catch (error) {
       console.error('Erro ao salvar os dados no AsyncStorage:', error);
     }
@@ -99,10 +96,7 @@ export default function InformacoesCorporais() {
       />
 
       {/* Salvar */}
-      <Button style={styles.button} onPress={salvarDados}>
-        <Text style={styles.buttonText}>Salvar Dados</Text>
-
-      </Button>
+      <Button style={styles.button} onPress={salvarDados} title="Salvar Dados" />
 
       {/* Histórico */}
       <View style={styles.historicoContainer}>
@@ -124,54 +118,63 @@ export default function InformacoesCorporais() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#E0F7FA',
-    paddingTop: 40,
-    paddingHorizontal: 20,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#f7f7f7',
   },
   title: {
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 20,
-    color: '#00796B',
+    marginBottom: 30,
+    color: '#333',
   },
   input: {
-    borderWidth: 1,
-    borderColor: '#00796B',
-    borderRadius: 10,
+    width: '100%',
     padding: 10,
-    marginBottom: 20,
+    marginBottom: 15,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    backgroundColor: '#fff',
     fontSize: 16,
-    color: '#004D40',
-  },
-  button: {
-    backgroundColor: '#00796B',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 10,
-    alignSelf: 'center',
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
+    color: '#333',
   },
   text: {
-    fontSize: 16,
-    color: '#004D40',
+    fontSize: 18,
+    color: '#333',
     marginBottom: 20,
-    textAlign: 'center',
+  },
+  button: {
+    marginTop: 20,
+    backgroundColor: '#007BFF',
+    paddingVertical: 10,
+    paddingHorizontal: 30,
+    borderRadius: 5,
+    color: 'white',
   },
   historicoContainer: {
-    marginTop: 20,
+    marginTop: 30,
+    width: '100%',
+    padding: 20,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
   },
   historicoTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
-    color: '#00796B',
     marginBottom: 10,
+    color: '#333',
   },
   historicoText: {
     fontSize: 16,
-    color: '#004D40',
+    color: '#555',
+    marginBottom: 5,
   },
 });
