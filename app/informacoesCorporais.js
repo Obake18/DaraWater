@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Button } from 'react-native-web';
 
 // Função para calcular a meta de água baseada no peso e no objetivo
 const calcularMetaDeAgua = (peso, objetivo) => {
@@ -98,9 +99,10 @@ export default function InformacoesCorporais() {
       />
 
       {/* Salvar */}
-      <TouchableOpacity style={styles.button} onPress={salvarDados}>
+      <Button style={styles.button} onPress={salvarDados}>
         <Text style={styles.buttonText}>Salvar Dados</Text>
-      </TouchableOpacity>
+
+      </Button>
 
       {/* Histórico */}
       <View style={styles.historicoContainer}>
