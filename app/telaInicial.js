@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, ProgressBarAndroid } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import * as Progress from 'react-native-progress'; // Importando o Progress
 
 const WATER_GOAL = 2000; // Exemplo de meta de 2000 ml
 
@@ -27,11 +28,12 @@ export default function TelaInicial() {
       <Text style={styles.intakeText}>Consumido: {waterIntake} ml</Text>
 
       {/* Barra de Progresso */}
-      <ProgressBarAndroid
-        styleAttr="Horizontal"
-        indeterminate={false}
-        progress={waterIntake / WATER_GOAL}
-        color="#00796B"
+      <Progress.Bar
+        style={{ width: 200 }}
+        progress={waterIntake / WATER_GOAL} // Atualizando a barra de progresso conforme a água consumida
+        height={20} // Ajuste da altura da barra
+        color="#00796B" // Cor da barra de progresso
+        unfilledColor="#B2DFDB" // Cor da parte não preenchida da barra
       />
 
       {/* Botão para adicionar 200 ml */}
